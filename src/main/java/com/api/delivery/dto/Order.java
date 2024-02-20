@@ -19,7 +19,15 @@ public class Order {
     private String title;
     private BigDecimal price;
     private Integer amount;
+    private String thumbnail;
+//    @Lob
+//    private Byte[] thumbnail;
 
-    @Lob
-    private Byte[] thumbnail;
+
+    public Order(OrderRegisterDto data) {
+        this.title = data.title();
+        this.price = data.price();
+        this.amount = data.amount();
+        this.thumbnail = data.thumbnail();
+    }
 }
