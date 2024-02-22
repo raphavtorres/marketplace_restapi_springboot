@@ -1,4 +1,4 @@
-package com.api.delivery.exception;
+package com.api.delivery.infra.exception;
 
 public class ValidationException extends RuntimeException {
 

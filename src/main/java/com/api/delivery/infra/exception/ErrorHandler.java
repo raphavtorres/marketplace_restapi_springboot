@@ -1,4 +1,4 @@
-package com.api.delivery.exception;
+package com.api.delivery.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
