@@ -8,8 +8,8 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 
-@Table(name = "doctors")
-@Entity(name = "Doctor")
+@Table(name = "orders")
+@Entity(name = "Order")
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
