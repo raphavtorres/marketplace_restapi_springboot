@@ -1,5 +1,6 @@
-package com.api.delivery.dto;
+package com.api.delivery.model;
 
+import com.api.delivery.dto.OrderRegisterDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

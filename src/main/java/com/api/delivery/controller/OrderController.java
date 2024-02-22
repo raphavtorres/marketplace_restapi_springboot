@@ -1,6 +1,6 @@
 package com.api.delivery.controller;
 
-import com.api.delivery.dto.Order;
+import com.api.delivery.model.Order;
 import com.api.delivery.dto.OrderDetailDto;
 import com.api.delivery.dto.OrderRegisterDto;
 import com.api.delivery.repository.OrderRepository;

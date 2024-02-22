@@ -1,5 +1,8 @@
 package com.api.delivery.infra.security;
 
+import com.api.delivery.model.User;
+import com.api.delivery.infra.security.token.TokenDto;
+import com.api.delivery.infra.security.token.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
    @Autowired
-    private AuthenticationManager manager;
+   private AuthenticationManager manager;
+
+   @Autowired
+   private TokenService tokenService;
 
     @PostMapping
     public ResponseEntity login(@RequestBody @Valid AuthenticationDto authenticationDto) {
-        var token = new UsernamePasswordAuthenticationToken(authenticationDto.username(), authenticationDto.password());
-        var authentication = manager.authenticate(token);
-
-        return ResponseEntity.ok().build();
+        var authenticationToken = new UsernamePasswordAuthenticationToken(authenticationDto.username(), authenticationDto.password());
+        var authentication = manager.authenticate(authenticationToken);
+        var tokenJWT = tokenService.createToken((User) authentication.getPrincipal());
+        return ResponseEntity.ok(new TokenDto(tokenJWT));
     }
 
 
