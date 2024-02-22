@@ -30,4 +30,6 @@ public class Order {
         this.amount = data.amount();
         this.thumbnail = data.thumbnail();
     }
+
+    public Order() {}
 }

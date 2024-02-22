@@ -7,11 +7,10 @@ import com.api.delivery.repository.OrderRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -27,7 +26,13 @@ public class OrderController {
         Order order = new Order(orderRegisterDto);
         orderRepository.save(order);
 
-        var uri = uriComponentsBuilder.path("/{id}").buildAndExpand(order.getId()).toUri();
+        var uri = uriComponentsBuilder.path("/orders/{id}").buildAndExpand(order.getId()).toUri();
         return ResponseEntity.created(uri).body(new OrderDetailDto(order));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<OrderDetailDto>> list(Pageable pagination){
+        var page = orderRepository.findAll(pagination).map(OrderDetailDto::new);
+        return ResponseEntity.ok(page);
     }
 }
