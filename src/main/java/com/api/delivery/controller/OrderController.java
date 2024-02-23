@@ -1,8 +1,8 @@
 package com.api.delivery.controller;
 
-import com.api.delivery.model.Order;
-import com.api.delivery.dto.OrderDetailDto;
-import com.api.delivery.dto.OrderRegisterDto;
+import com.api.delivery.domain.order.Order;
+import com.api.delivery.domain.order.OrderDetailDto;
+import com.api.delivery.domain.order.OrderRegisterDto;
 import com.api.delivery.repository.OrderRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

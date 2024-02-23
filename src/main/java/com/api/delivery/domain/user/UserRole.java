@@ -1,4 +1,4 @@
-package com.api.delivery.constant;
+package com.api.delivery.domain.user;
 
 public enum UserRole {
     ADMIN("admin"),

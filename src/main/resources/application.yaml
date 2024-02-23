@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/delivery_api
     username: postgres
-    password: root
+    password: 123
   jpa:
     hibernate:
       ddl-auto: update

@@ -1,6 +1,6 @@
-package com.api.delivery.dto;
+package com.api.delivery.domain.order;
 
-import com.api.delivery.model.Order;
+import com.api.delivery.domain.order.Order;
 
 import java.math.BigDecimal;
 

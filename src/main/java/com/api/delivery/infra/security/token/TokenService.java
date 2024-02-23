@@ -1,6 +1,6 @@
 package com.api.delivery.infra.security.token;
 
-import com.api.delivery.model.User;
+import com.api.delivery.domain.user.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -18,7 +18,7 @@ public class TokenService {
     @Value("{api.security.token.service}")
     private String secret;
 
-    public String createToken(User user) {
+    public String generateToken(User user) {
         try {
             var algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
@@ -31,7 +31,7 @@ public class TokenService {
         }
     }
 
-    public String getSubject(String tokenJWT) {
+    public String validateTokenAndGetSubject(String tokenJWT) {
         try {
             var algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)

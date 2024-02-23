@@ -1,4 +1,4 @@
-package com.api.delivery.infra.security;
+package com.api.delivery.domain.user;
 
 public record AuthenticationDto(String username, String password) {
 }

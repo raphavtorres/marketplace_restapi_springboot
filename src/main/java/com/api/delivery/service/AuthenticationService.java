@@ -1,4 +1,4 @@
-package com.api.delivery.infra.security;
+package com.api.delivery.service;
 
 import com.api.delivery.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -30,8 +30,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         // if there's token...
         if (tokenJWT != null) {
-            // validate token and get subject
-            var subject = tokenService.getSubject(tokenJWT);
+            // validate token and get subject (username)
+            var subject = tokenService.validateTokenAndGetSubject(tokenJWT);
             // get the user in database with subject
             var user = userRepository.findByUsername(subject);
             // say to spring that the user is authenticated
