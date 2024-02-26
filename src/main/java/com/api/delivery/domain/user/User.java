@@ -20,8 +20,8 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String username;
     private String password;
     private UserRole role;

@@ -10,7 +10,9 @@ public record OrderRegisterDto(@NotBlank
                                @NotNull
                                BigDecimal price,
                                @NotNull
-                               Integer amount,
+                               Integer quantity,
+                               @NotNull
+                               BigDecimal totalPrice,
                                String thumbnail
 //                               Byte thumbnail
                                ) {

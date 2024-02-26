@@ -33,9 +33,9 @@ public class SecurityConfigurations {
                     // REVIEW LOGIC
                     req.requestMatchers(HttpMethod.POST, "/auth/register").permitAll();
                     // Create order => user
-                    req.requestMatchers(HttpMethod.POST, "/orders").hasRole("USER");
+                    req.requestMatchers(HttpMethod.POST, "/orders").hasAnyRole("ADMIN", "USER");
                     // Get order => admin
-                    req.requestMatchers(HttpMethod.GET, "/orders").hasRole("ADMIN");
+                    req.requestMatchers(HttpMethod.GET, "/orders").hasAnyRole("ADMIN", "USER");
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
