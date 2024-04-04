@@ -6,6 +6,7 @@ import com.api.delivery.domain.order.OrderRegisterDto;
 import com.api.delivery.domain.user.User;
 import com.api.delivery.domain.user.UserRole;
 import com.api.delivery.repository.OrderRepository;
+import com.api.delivery.service.OrderService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,28 +23,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class OrderController {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
     @PostMapping
     @Transactional
     public ResponseEntity register(@RequestBody @Valid OrderRegisterDto orderRegisterDto, UriComponentsBuilder uriComponentsBuilder) {
-        Order order = new Order(orderRegisterDto);
-        orderRepository.save(order);
+        OrderDetailDto orderDetailDto = orderService.createOrder(orderRegisterDto);
 
-        var uri = uriComponentsBuilder.path("/orders/{id}").buildAndExpand(order.getId()).toUri();
-        return ResponseEntity.created(uri).body(new OrderDetailDto(order));
+        var uri = uriComponentsBuilder.path("/orders/{id}").build(orderDetailDto.id());
+        return ResponseEntity.created(uri).body(orderDetailDto);
     }
 
     @GetMapping
     public ResponseEntity<Page<OrderDetailDto>> list(Pageable pagination) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (authentication.getAuthorities().toString().contains(UserRole.ADMIN.toString())) {
-            var page = orderRepository.findAll(pagination).map(OrderDetailDto::new);
-            return ResponseEntity.ok(page);
-        }
-        var page = orderRepository.findAllByUserId(user.getId(), pagination);
-        return ResponseEntity.ok(page);
+        return orderService.GetOrderByAuthenticatedUser(pagination);
     }
 }
